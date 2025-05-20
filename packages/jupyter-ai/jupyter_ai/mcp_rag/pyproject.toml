@@ -1,0 +1,15 @@
+[project]
+name = "rag"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.51.0",
+    "chroma>=0.2.0",
+    "chromadb>=1.0.9",
+    "langchain>=0.3.25",
+    "langchain-community>=0.3.24",
+    "langchain-ollama>=0.3.3",
+    "mcp[cli]>=1.9.0",
+]
