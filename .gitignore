@@ -139,3 +139,4 @@ dev.sh
 # the source repo.
 packages/**/_version.py
 *.chat
+packages/jupyter-ai/jupyter_ai/mcp_rag/.env
