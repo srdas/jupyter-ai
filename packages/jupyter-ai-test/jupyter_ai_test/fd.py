@@ -3,10 +3,12 @@ from os import getenv
 from typing import Any, Dict, Optional
 
 import requests
+import json
 
 from agno.tools import Toolkit
 from agno.utils.log import log_error
 
+from statsmodels.tsa.arima.model import ARIMA
 
 
 class FinancialDatasetsTools(Toolkit):
@@ -19,6 +21,7 @@ class FinancialDatasetsTools(Toolkit):
         enable_prices: bool = True,
         enable_news: bool = True,
         enable_sec_filings: bool = False,
+        enable_arima: bool = True,
         **kwargs,
     ):
         """
@@ -34,9 +37,6 @@ class FinancialDatasetsTools(Toolkit):
             enable_sec_filings: Enable SEC filings related functions
         """
         super().__init__(name="financial_datasets_tools", **kwargs)
-        FINANCIAL_DATASETS_API_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-        os.environ['FINANCIAL_DATASETS_API_KEY'] = FINANCIAL_DATASETS_API_KEY
-
 
         self.api_key: Optional[str] = api_key or getenv("FINANCIAL_DATASETS_API_KEY")
         if not self.api_key:
@@ -67,6 +67,9 @@ class FinancialDatasetsTools(Toolkit):
 
         if enable_sec_filings:
             self.register(self.get_sec_filings)
+
+        if enable_arima:
+            self.register(self.arima_forecast)  # ARIMA forecasting function
 
 
     def _make_request(self, endpoint: str, params: Dict[str, Any]) -> str:
@@ -376,3 +379,33 @@ class FinancialDatasetsTools(Toolkit):
         if filing_type:
             params["filing_type"] = filing_type
         return self._make_request("filings", params)
+
+
+    ###################################
+    # Non FD, non API Models
+    ###################################
+
+    # ARIMA forecasting function
+    def arima_forecast(self, series, prediction_length, p=61, d=1, q=1):
+        """
+        Forecasts future data using the ARIMA model.
+        https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html
+        Args:
+            series: Time series data as a list or numpy array
+            prediction_length: Number of steps to forecast
+            p: autoregressive parameter 
+            d: differencing parameter d 
+            q: moving average parameter q
+        (p,d,q) is the order of the model for the autoregressive, differences, and 
+        moving average components.
+        Returns:
+            forecast: Forecasted values as a numpy array
+        """
+        model = ARIMA(series, order=(p, d, q))
+        print("FinTools: ARIMA ... PIPELINE LOADED")
+        print("Series =", series)
+        model_fit = model.fit()
+        forecast = model_fit.forecast(steps=prediction_length)
+        forecast = json.dumps({"forecast": forecast})  # Convert to JSON string for consistency
+        print("Forecast series:", forecast)
+        return forecast

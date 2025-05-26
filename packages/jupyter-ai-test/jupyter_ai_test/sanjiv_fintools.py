@@ -14,18 +14,25 @@ import numpy as np
 import yfinance as yf  # requires: pip install yfinance
 from statsmodels.tsa.arima.model import ARIMA
 from prophet import Prophet
+from agno.tools import Toolkit
+from agno.utils.log import log_error
 
 
 
 print("FinTools: Loading...BEFORE CLASS")
 
-class FinTools(object):
+class FinTools(Toolkit):
     """
     A collection of financial tools for data retrieval, analysis, and forecasting.
     """
     print("FinTools: Loading...")
-    def __init__(self):
-        self.data = [1, 2, 3, 4, 5]
+    def __init__(
+        self,
+        enable_arima: bool = True,
+    ):
+        # Register the tools
+        if enable_arima:
+            self.register(self.arima_forecast)
 
     print("FinTools: initialized.")
 
