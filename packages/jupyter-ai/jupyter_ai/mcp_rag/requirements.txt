@@ -3,3 +3,13 @@ sentence-transformers
 flask
 requests
 numpy
+mcp
+agno
+matplotlib
+lancedb 
+tantivy 
+pypdf 
+duckduckgo-search 
+yfinance
+statsmodels
+chronos-forecast

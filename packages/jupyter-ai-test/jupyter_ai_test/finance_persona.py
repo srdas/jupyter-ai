@@ -28,7 +28,7 @@ import json
 import requests
 import pandas as pd  # requires: pip install pandas
 import torch
-from chronos import BaseChronosPipeline # requires: pip install chronos-forecasting
+# from chronos import BaseChronosPipeline # requires: pip install chronos-forecasting
 import matplotlib.pyplot as plt  # requires: pip install matplotlib
 import numpy as np
 
