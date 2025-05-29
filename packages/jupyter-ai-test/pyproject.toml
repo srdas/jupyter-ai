@@ -37,7 +37,7 @@ test-slash-command = "jupyter_ai_test.test_slash_commands:TestSlashCommand"
 
 [project.entry-points."jupyter_ai.personas"]
 debug-persona = "jupyter_ai_test.debug_persona:DebugPersona"
-finance-persona = "jupyter_ai_test.finance_persona:FinancePersona"
+finance-persona = "jupyter_ai_test.financePersona.finance_persona:FinancePersona"
 
 [tool.hatch.build.hooks.version]
 path = "jupyter_ai_test/_version.py"
