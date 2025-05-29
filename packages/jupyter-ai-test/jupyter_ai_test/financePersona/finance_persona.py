@@ -204,6 +204,8 @@ class FinancePersona(BasePersona):
                 "Then, you will use the prices to use the `arima_agent` to create a forecast.",
                 "If the request asks for a forecast, you will use both `stock_price_agent` and `arima_agent`.",
                 "If the request asks for SEC filings, you will use the `sec_agent`.",
+                "If you are not sure about the request, do not ask for clarification. Proceed with the best guess.",
+                "Please let the user know that you have finished processing their request.",
             ],
             show_tool_calls=True,
             markdown=True,
