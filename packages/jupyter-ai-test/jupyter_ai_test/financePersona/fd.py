@@ -315,6 +315,7 @@ class FinancialDatasetsTools(Toolkit):
         Returns:
             Dictionary containing stock prices
         """
+        print("FinTools: get_stock_prices ... PIPELINE LOADED")
         params = {"ticker": ticker,
                   "start_date": start_date,
                   "end_date": end_date,
@@ -375,6 +376,7 @@ class FinancialDatasetsTools(Toolkit):
         Returns:
             Dictionary containing SEC filings
         """
+        print("FinTools: get_sec_filings ... PIPELINE LOADED")
         params: Dict[str, Any] = {"ticker": ticker}
         if filing_type:
             params["filing_type"] = filing_type
@@ -401,8 +403,8 @@ class FinancialDatasetsTools(Toolkit):
         Returns:
             forecast: Forecasted values as a numpy array
         """
-        model = ARIMA(series, order=(p, d, q))
         print("FinTools: ARIMA ... PIPELINE LOADED")
+        model = ARIMA(series, order=(p, d, q))
         model_fit = model.fit()
         forecast = model_fit.forecast(steps=prediction_length)
         forecast = json.dumps({"forecast": list(forecast)})  # Convert to JSON string for consistency

@@ -96,7 +96,6 @@ class FinancePersona(BasePersona):
             msg = variables.input.split(" ", 1)[1].strip()
             if msg:
                 # Call the agno_finance function to process the message
-                self.send_message("The AGNO Finance agent is processing your request ...")
                 self.agno_finance(msg)
             else:
                 self.send_message("Error: Query failed. Please try again with a different query.")
@@ -120,6 +119,7 @@ class FinancePersona(BasePersona):
     # Use Agno to process financial prompts 
     # Multi agent workflow to get stock prices and forecast them using ARIMA
     def agno_finance(self, message: Message):
+        self.send_message("The AGNO Finance agent is processing your request ...")
         FINANCIAL_DATASETS_API_KEY = env_api_keys_from_config(API_KEY_NAME="TOGETHER_API_KEY", file_path=DEFAULT_CONFIG_PATH)
         # Agent for stock prices
         stock_price_agent = Agent(

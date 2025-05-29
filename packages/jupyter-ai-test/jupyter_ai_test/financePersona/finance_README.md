@@ -12,7 +12,7 @@ The Persona is packaged in a folder titled `financePersona` as containing the fo
 
 ## Set up
 
-The use of this persona requires an API key from Financial Datasets. You can register and find your account to get an API key. It has excellent tools for access to various quantitative and textual data. For details, see the [documentation](https://docs.financialdatasets.ai/introduction).
+The use of this persona requires an API key from Financial Datasets. You can register and find your account to get an API key. It has excellent tools for access to various quantitative and textual data. For details, see the [documentation](https://docs.financialdatasets.ai/introduction). Once you have the API key, enter AI Settings and choose any `TogetherAI` model, when asked for the API key, enter the Financial Datasets API key, as this persona uses that as a placeholder for the datasets API key. 
 
 Update the TOML file `jupyter_ai_test/pyproject.toml` in Jupyter AI with the following line in the personas section:
 
